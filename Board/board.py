@@ -36,7 +36,7 @@ class Board:
             self.board[row, col - 1] = self.flip(self.board[row, col - 1])
 
         # checking right
-        if row + 1 < self.size:
+        if col + 1 < self.size:
             self.board[row, col + 1] = self.flip(self.board[row, col + 1])
 
     def is_goal(self):
@@ -47,3 +47,4 @@ class Board:
         if not value == 0 and not value == 1:
             raise ValueError('Flip method can only take 1 or 0.')
         return 1 - value
+
