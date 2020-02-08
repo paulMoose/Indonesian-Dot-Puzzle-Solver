@@ -47,4 +47,3 @@ class Board:
         if not value == 0 and not value == 1:
             raise ValueError('Flip method can only take 1 or 0.')
         return 1 - value
-
