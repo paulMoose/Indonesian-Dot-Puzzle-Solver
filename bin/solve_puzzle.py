@@ -8,6 +8,7 @@ import os
 
 sys.path.append(Path(__file__).resolve().parents[1].as_posix())
 from core.dfs import DFS
+from core.bfs import BFS
 from core.a_star import AStar
 
 
@@ -35,6 +36,9 @@ def main():
 
                 dfs_solver = DFS(puzzle_size, board_values, max_d=max_d, id=index)
                 dfs_solver.solve()
+
+                bfs_solver = BFS(puzzle_size, board_values, max_l=max_l, id=index)
+                bfs_solver.solve()
 
                 a_star_solver = AStar(puzzle_size, board_values, max_l=max_l, id=index)
                 a_star_solver.solve()

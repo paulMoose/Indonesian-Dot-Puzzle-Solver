@@ -60,6 +60,7 @@ class AStar(Solver):
         Used to solve a Indonesian Dot Puzzle using the Algorithm A*.
         Will backtrack when the max length is reached.
 
+        :param string algo_name: name of Algorithm
         :return: The solution path if found or None if no solution exists.
         """
         length = 1
