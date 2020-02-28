@@ -20,7 +20,6 @@ class Solver:
         self.id = kwargs.get('id', None)
         self.alphabet = list(string.ascii_uppercase)
 
-        self.open = [Node(self.board, None, 0)]
         self.closed = []  # list structure is common to all type of algorithm
 
     def get_possible_moves(self, parent_node):
@@ -42,12 +41,7 @@ class Solver:
             touched_token = '{}{}'.format(self.alphabet[row], col + 1)
 
             child_board.touch(row, col)
-            g_of_parent_node = 0
-            try:
-                g_of_parent_node = parent_node.g
-            except AttributeError:
-                pass  # just ignore, parent_node is not an AStarNode
-            new_node = Node(child_board, parent_node, touched_token, g=g_of_parent_node+1)
+            new_node = Node(child_board, parent_node, touched_token)
 
             if not (new_node in self.closed or new_node in self.open):
                 possibilities.append(new_node)

@@ -6,6 +6,7 @@ class DFS(Solver):
 
     def __init__(self, size, board_values, **kwargs):
         super().__init__(size, board_values, id=kwargs.get('id'))
+        self.open = [Node(self.board, None, 0)]
         self.max_d = kwargs.get('max_d', None)
 
         self.clear_search_path_if_exists('dfs')

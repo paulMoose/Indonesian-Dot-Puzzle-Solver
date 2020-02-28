@@ -16,6 +16,10 @@ class Node:
         self.board = board
         self.token_touched = token
 
+        self.f = kwargs.get('f', 0)
+        self.g = kwargs.get('g', 0)
+        self.h = kwargs.get('h', 0)
+
     def __eq__(self, other):
         """
         Comparing 2 Nodes to see if they are the same. Used when verifying if a configuration is in the open or closed

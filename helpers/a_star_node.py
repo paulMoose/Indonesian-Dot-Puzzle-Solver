@@ -3,19 +3,7 @@ from helpers.node import Node
 
 class AStarNode(Node):
     def __init__(self, board, parent, token, **kwargs):
-        super().__init__(board, parent, token)
-        self.f = kwargs.get('f', 0)
-        self.g = kwargs.get('g', 0)
-        self.h = kwargs.get('h', 0)
-
-    def h(self, flattened_board):
-        """
-        Heuristic 1. Hamming distance: counts the number of 1's in the flattened_board
-
-        :param flattened_board: 1D array board
-        :return: Heuristic value.
-        """
-        return sum(flattened_board)
+        super().__init__(board, parent, token, **kwargs)
 
     def __lt__(self, other):
         """
@@ -32,15 +20,15 @@ class AStarNode(Node):
         if self.board.size != other.board.size:
             raise ValueError('Boards should be the same size to compare.')
 
-        self.h = self.h(flattened_board)
-        other.h = self.h(flattened_other)
-
-        self.f = self.h + self.g
-        other.f = other.h + other.g
-
         if self.f < other.f:
             return True
         elif self.f > other.f:
             return False
+        else:  # if f(n) is a tie, evaluate first white token(s)
+            for original_board, other_board in zip(flattened_board, flattened_other):
+                if original_board < other_board:
+                    return True
+                elif other_board < original_board:
+                    return False
 
         return True
