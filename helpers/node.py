@@ -39,6 +39,7 @@ class Node:
         :param other: Other Node
         :return: The smaller node.
         """
+        # flattens multi-array board to 1D array
         flattened_board = self.board.board.flatten()
         flattened_other = other.board.board.flatten()
 

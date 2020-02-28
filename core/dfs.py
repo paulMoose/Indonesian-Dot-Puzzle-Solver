@@ -1,4 +1,5 @@
 from core.solver import Solver
+from helpers.node import Node
 
 
 class DFS(Solver):
@@ -25,9 +26,9 @@ class DFS(Solver):
                 return self.get_solution_path(x)
             if depth <= self.max_d:
                 children = self.get_possible_moves(x)
-            self.closed.append(x)
-            self.open = children + self.open
-            children = []
+            self.closed.append(x)  # put visited node in closed list
+            self.open = children + self.open  # putting children in list as a stack behaviour
+            children.clear()
             depth += 1
 
         self.write_solution_path(None, 'dfs')

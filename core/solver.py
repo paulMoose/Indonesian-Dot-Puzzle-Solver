@@ -21,7 +21,7 @@ class Solver:
         self.alphabet = list(string.ascii_uppercase)
 
         self.open = [Node(self.board, None, 0)]
-        self.closed = []
+        self.closed = []  # list structure is common to all type of algorithm
 
     def get_possible_moves(self, parent_node):
         """
@@ -33,7 +33,7 @@ class Solver:
         :param Node parent_node: Node from which the possible moves will be calculated.
         :return: A sorted list of the possible moves to take.
         """
-        possibilities = []
+        possibilities = []  # list possible children
 
         # Creating all the possible board configurations
         for row, col in np.ndindex(parent_node.board.size, parent_node.board.size):
@@ -47,7 +47,7 @@ class Solver:
             if not (new_node in self.closed or new_node in self.open):
                 possibilities.append(new_node)
 
-        possibilities.sort()
+        possibilities.sort()  # uses the overridden function of __lt__
 
         return possibilities
 
