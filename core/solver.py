@@ -30,7 +30,7 @@ class Solver:
         Ties between equivalent boards are broken by preferring the board that has its first white token(s)
         at an earlier position based on a left-to-right, then top-down order.
 
-        :param Node parent_node: Node from which the possible moves will be calculated.
+        :param parent_node: Node from which the possible moves will be calculated.
         :return: A sorted list of the possible moves to take.
         """
         possibilities = []  # list possible children
@@ -42,7 +42,12 @@ class Solver:
             touched_token = '{}{}'.format(self.alphabet[row], col + 1)
 
             child_board.touch(row, col)
-            new_node = Node(child_board, parent_node, touched_token)
+            g_of_parent_node = 0
+            try:
+                g_of_parent_node = parent_node.g
+            except AttributeError:
+                pass  # just ignore, parent_node is not an AStarNode
+            new_node = Node(child_board, parent_node, touched_token, g=g_of_parent_node+1)
 
             if not (new_node in self.closed or new_node in self.open):
                 possibilities.append(new_node)

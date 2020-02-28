@@ -4,9 +4,9 @@ from helpers.node import Node
 class AStarNode(Node):
     def __init__(self, board, parent, token, **kwargs):
         super().__init__(board, parent, token)
-        self.f = kwargs.get('f')
-        self.g = kwargs.get('g')
-        self.h = kwargs.get('h')
+        self.f = kwargs.get('f', 0)
+        self.g = kwargs.get('g', 0)
+        self.h = kwargs.get('h', 0)
 
     def h(self, flattened_board):
         """
@@ -22,7 +22,7 @@ class AStarNode(Node):
         Verifies which one of the nodes is considered smaller than the other. Used when sorting the list of
         possibilities by the smaller f(n).
 
-        :param other: Other Node
+        :param AStarNode other: Other Node
         :return: The smaller node.
         """
         # flattens multi-array board to 1D array
@@ -32,12 +32,15 @@ class AStarNode(Node):
         if self.board.size != other.board.size:
             raise ValueError('Boards should be the same size to compare.')
 
-        f_of_board = self.h(flattened_board) + self.g
-        f_of_other = self.h(flattened_other) + other.g
+        self.h = self.h(flattened_board)
+        other.h = self.h(flattened_other)
 
-        if f_of_board < f_of_other:
+        self.f = self.h + self.g
+        other.f = other.h + other.g
+
+        if self.f < other.f:
             return True
-        elif f_of_board > f_of_other:
+        elif self.f > other.f:
             return False
 
         return True
