@@ -5,6 +5,10 @@ class AStarNode(Node):
     def __init__(self, board, parent, token, **kwargs):
         super().__init__(board, parent, token, **kwargs)
 
+        self.f = kwargs.get('f', 0)
+        self.g = kwargs.get('g', 0)
+        self.h = kwargs.get('h', 0)
+
     def __lt__(self, other):
         """
         Verifies which one of the nodes is considered smaller than the other. Used when sorting the list of

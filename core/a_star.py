@@ -35,7 +35,7 @@ class AStar(Solver):
 
             child_board.touch(row, col)
             g_of_child = parent_node.g+1
-            h_of_child = Heuristics.h3(child_board)
+            h_of_child = Heuristics.h1(child_board)
             f_of_child = g_of_child + h_of_child
             new_node = AStarNode(child_board, parent_node, touched_token, f=f_of_child, g=g_of_child, h=h_of_child)
 
@@ -78,3 +78,6 @@ class AStar(Solver):
 
             children.clear()
             length += 1
+
+        self.write_solution_path(None, 'a_star')
+        return None  # No solution found

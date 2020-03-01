@@ -48,13 +48,3 @@ class Heuristics:
                     h_value += 1
 
         return h_value
-
-    @staticmethod
-    def h3(input_board):
-        """
-        Heuristic 2.
-
-        :param input_board: board of current node
-        :return: Heuristic value.
-        """
-

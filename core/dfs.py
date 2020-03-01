@@ -28,6 +28,9 @@ class DFS(Solver):
                 return self.get_solution_path(current_node)
             if depth <= self.max_d:
                 children = self.get_possible_moves(current_node)
+            else:
+                self.write_solution_path(None, 'dfs')
+                return None
             self.closed.append(current_node)  # put visited node in closed list
             self.open = children + self.open  # putting children in list as a stack behaviour
             children.clear()

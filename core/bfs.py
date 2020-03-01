@@ -76,3 +76,6 @@ class BFS(Solver):
 
             children.clear()
             length += 1
+
+        self.write_solution_path(None, 'bfs')
+        return None  # No solution found
