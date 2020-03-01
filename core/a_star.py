@@ -1,5 +1,6 @@
 from core.solver import Solver
-from helpers.a_star_node import AStarNode
+from helpers.h_node import AStarNode
+from helpers.heuristics import Heuristics
 import heapq as open_list
 
 import numpy as np
@@ -13,16 +14,6 @@ class AStar(Solver):
         self.max_l = kwargs.get('max_l', None)
 
         self.clear_search_path_if_exists('a_star')
-
-    def h(self, current_board):
-        """
-        Heuristic 1. Hamming distance: counts the number of 1's in the flattened_board
-
-        :param current_board: board of current node
-        :return: Heuristic value.
-        """
-        flattened_board = current_board.board.flatten()
-        return sum(flattened_board)
 
     def get_possible_moves(self, parent_node):
         """
@@ -44,7 +35,7 @@ class AStar(Solver):
 
             child_board.touch(row, col)
             g_of_child = parent_node.g+1
-            h_of_child = self.h(child_board)
+            h_of_child = Heuristics.h3(child_board)
             f_of_child = g_of_child + h_of_child
             new_node = AStarNode(child_board, parent_node, touched_token, f=f_of_child, g=g_of_child, h=h_of_child)
 
@@ -60,7 +51,6 @@ class AStar(Solver):
         Used to solve a Indonesian Dot Puzzle using the Algorithm A*.
         Will backtrack when the max length is reached.
 
-        :param string algo_name: name of Algorithm
         :return: The solution path if found or None if no solution exists.
         """
         length = 1

@@ -16,7 +16,6 @@ class DFS(Solver):
         Used to solve a Indonesian Dot Puzzle using the Depth first search method. Will backtrack when the max depth
         level is reached.
 
-        :param string algo_name: name of Algorithm
         :return: The solution path if found or None if no solution exists.
         """
         depth = 1
